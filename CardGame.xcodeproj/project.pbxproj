@@ -13,6 +13,8 @@
 		1157CA242B6EAFAB00422F4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1157CA222B6EAFAB00422F4F /* Main.storyboard */; };
 		1157CA262B6EAFAC00422F4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1157CA252B6EAFAC00422F4F /* Assets.xcassets */; };
 		1157CA292B6EAFAC00422F4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1157CA272B6EAFAC00422F4F /* LaunchScreen.storyboard */; };
+		1157CA342B6EB05F00422F4F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157CA332B6EB05F00422F4F /* Card.swift */; };
+		1157CA372B6EB0AE00422F4F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157CA362B6EB0AE00422F4F /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		1157CA252B6EAFAC00422F4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1157CA282B6EAFAC00422F4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1157CA2A2B6EAFAC00422F4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1157CA332B6EB05F00422F4F /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		1157CA362B6EB0AE00422F4F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,57 @@
 		1157CA1B2B6EAFAB00422F4F /* CardGame */ = {
 			isa = PBXGroup;
 			children = (
-				1157CA1C2B6EAFAB00422F4F /* AppDelegate.swift */,
-				1157CA1E2B6EAFAB00422F4F /* SceneDelegate.swift */,
-				1157CA202B6EAFAB00422F4F /* ViewController.swift */,
-				1157CA222B6EAFAB00422F4F /* Main.storyboard */,
+				1157CA312B6EAFDC00422F4F /* ViewControllers */,
+				1157CA322B6EAFF400422F4F /* StoryBoards */,
+				1157CA382B6EB0B700422F4F /* Services */,
+				1157CA352B6EB06F00422F4F /* Models */,
+				1157CA302B6EAFD000422F4F /* App */,
 				1157CA252B6EAFAC00422F4F /* Assets.xcassets */,
-				1157CA272B6EAFAC00422F4F /* LaunchScreen.storyboard */,
-				1157CA2A2B6EAFAC00422F4F /* Info.plist */,
 			);
 			path = CardGame;
+			sourceTree = "<group>";
+		};
+		1157CA302B6EAFD000422F4F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1157CA1C2B6EAFAB00422F4F /* AppDelegate.swift */,
+				1157CA1E2B6EAFAB00422F4F /* SceneDelegate.swift */,
+				1157CA2A2B6EAFAC00422F4F /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		1157CA312B6EAFDC00422F4F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1157CA202B6EAFAB00422F4F /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1157CA322B6EAFF400422F4F /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				1157CA222B6EAFAB00422F4F /* Main.storyboard */,
+				1157CA272B6EAFAC00422F4F /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		1157CA352B6EB06F00422F4F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1157CA332B6EB05F00422F4F /* Card.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1157CA382B6EB0B700422F4F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1157CA362B6EB0AE00422F4F /* NetworkManager.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +186,9 @@
 			files = (
 				1157CA212B6EAFAB00422F4F /* ViewController.swift in Sources */,
 				1157CA1D2B6EAFAB00422F4F /* AppDelegate.swift in Sources */,
+				1157CA372B6EB0AE00422F4F /* NetworkManager.swift in Sources */,
 				1157CA1F2B6EAFAB00422F4F /* SceneDelegate.swift in Sources */,
+				1157CA342B6EB05F00422F4F /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,12 +341,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CardGame/Info.plist;
+				INFOPLIST_FILE = CardGame/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -306,9 +355,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ns.moskalev.CardGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -320,12 +373,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CardGame/Info.plist;
+				INFOPLIST_FILE = CardGame/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -333,9 +387,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ns.moskalev.CardGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
