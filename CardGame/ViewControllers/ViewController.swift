@@ -15,28 +15,27 @@ final class ViewController: UIViewController {
     
     private let networkManager = NetworkManager.shared
     private var gameTable: GameTable?
-    private var cardBalance: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
-        fetchDesk()
+        fetchTable()
     }
     
     @IBAction func buttinAction() {
         if Int(label.text?.filter{ $0.isNumber } ?? "") ?? 0 > 0 {
             activityIndicator.startAnimating()
+            fetchCard()
         }
-        fetchCard()
     }
     
-    private func fetchDesk() {
+    private func fetchTable() {
         let url = URL(string: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")!
-        networkManager.fetch(GameTable.self, from: url) { [unowned self] result in
+        networkManager.fetchTable(from: url) { [unowned self] result in
             switch result {
-            case .success(let desk):
-                gameTable = desk
+            case .success(let table):
+                gameTable = table
             case .failure(let error):
                 print(error)
             }
@@ -45,17 +44,17 @@ final class ViewController: UIViewController {
     
     private func fetchCard() {
         guard let gameTable else { return }
-        let url = URL(string: "https://deckofcardsapi.com/api/deck/\(gameTable.deckId)/draw/?count=1")!
-        networkManager.fetch(CardDeck.self, from: url) { [unowned self] result in
+        let url = "https://deckofcardsapi.com/api/deck/\(gameTable.deckId)/draw/?count=1"
+        
+        networkManager.fetchCardDeck(from: url) { [unowned self] result in
             switch result {
-            case .success(let cardDesk):
-                guard let card = cardDesk.cards.first else { return }
-                let cardUrl = card.image
-                networkManager.fetchImage(from: cardUrl) { [unowned self] result in
+            case .success(let cardDeck):
+                let card = Card(cardDetails: cardDeck.cards.first as? [String : Any] ?? [:])
+                networkManager.fetchData(from: card.image) { [unowned self] result in
                     switch result {
                     case .success(let imageData):
                         cardView.image = UIImage(data: imageData)
-                        label.text = "Осталось карт в колоде: \(cardDesk.remaining)"
+                        label.text = "Осталось карт в колоде: \(cardDeck.remaining)"
                         activityIndicator.stopAnimating()
                     case .failure(let error):
                         print(error)

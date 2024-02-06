@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum NetworkError: Error {
     case noData
@@ -16,37 +17,47 @@ final class NetworkManager {
     static let shared = NetworkManager()
     
     private init() {}
-    
-    func fetch<T: Decodable>(_ type: T.Type, from url: URL, completion: @escaping(Result<T, NetworkError>) -> Void) {
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data else {
-                print(error ?? "No error description")
-                return
-            }
-                        
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                
-                let dataModel = try decoder.decode(T.self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(dataModel))
+        
+    func fetchTable(from url: URL, completion: @escaping(Result<GameTable, AFError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    let table = GameTable(gameTableDetails: (value as? [String: Any] ?? [:])) 
+                    completion(.success(table))
+                case .failure(let error):
+                    print(error)
+                    completion(.failure(error))
                 }
-            } catch {
-                completion(.failure(.decodingError))
             }
-        }.resume()
     }
     
-    func fetchImage(from url: URL, completion: @escaping(Result<Data, NetworkError>) -> Void) {
-        DispatchQueue.global().async {
-            guard let imageData = try? Data(contentsOf: url) else {
-                completion(.failure(.noData))
-                return
+    func fetchCardDeck(from url: String, completion: @escaping(Result<CardDeck, AFError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    let cards = CardDeck(cardDeskDetails: value as? [String : Any] ?? [:])
+                    completion(.success(cards))
+                case .failure(let error):
+                    print(error)
+                    completion(.failure(error))
+                }
             }
-            DispatchQueue.main.async {
-                completion(.success(imageData))
+    }
+    
+    func fetchData(from url: String, completion: @escaping(Result<Data, AFError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseData { dataResponse in
+                switch dataResponse.result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
-        }
     }
 }
